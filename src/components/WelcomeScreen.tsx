@@ -1,5 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Play, Sparkles, History, Trophy, User, Camera, Activity, BarChart3, Github, FileText, GitFork, Star } from "lucide-react";
+import {
+  Play,
+  Sparkles,
+  History,
+  Trophy,
+  User,
+  Camera,
+  Activity,
+  BarChart3,
+  Github,
+  FileText,
+  GitFork,
+  Star,
+} from "lucide-react";
 import { getSavedUserWeight, saveUserWeight } from "../utils/calorieEstimator";
 import "../styles/WelcomeScreen.css";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
@@ -36,7 +49,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
   const [userWeight, setUserWeight] = useState<string>(
-    String(getSavedUserWeight() ?? "")
+    String(getSavedUserWeight() ?? ""),
   );
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -65,7 +78,13 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
     if (!ctx) return;
 
     let animationId: number;
-    let particles: { x: number; y: number; vx: number; vy: number; radius: number }[] = [];
+    let particles: {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      radius: number;
+    }[] = [];
 
     const init = () => {
       canvas.width = window.innerWidth;
@@ -137,7 +156,6 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
       {/* Scrolling wrapper (From maintainer's branch) */}
       <div className="welcome-scroll-area">
         <div className="welcome-scroll-inner">
-          
           {/* ── Hero Section (Maintainer's updated structure) ── */}
           <div
             className="welcome-hero animate-in"
@@ -153,15 +171,17 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
 
             <h1 className="welcome-wordmark">SPECTRAX</h1>
 
-            <p className="welcome-tagline">
-              Train smarter. Every rep counts.
-            </p>
+            <p className="welcome-tagline">Train smarter. Every rep counts.</p>
 
             {leveling && (
               <div className="welcome-level-bar">
                 <div className="welcome-level-bar__header">
-                  <span className="welcome-level-bar__label">Level {leveling.level}</span>
-                  <span className="welcome-level-bar__xp">{leveling.xp} / {leveling.nextLevelXp} XP</span>
+                  <span className="welcome-level-bar__label">
+                    Level {leveling.level}
+                  </span>
+                  <span className="welcome-level-bar__xp">
+                    {leveling.xp} / {leveling.nextLevelXp} XP
+                  </span>
                 </div>
                 <div className="welcome-level-bar__track">
                   <div
@@ -184,57 +204,79 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
               </button>
 
               <div className="welcome-btn-row">
-  <button
-    onClick={onViewHistory}
-    className="welcome-btn-secondary welcome-btn-secondary--cyan"
-    aria-label="View Workout History"
-    tabIndex={0}
-  >
-    <History size={15} />
-    History
-  </button>
+                <button
+                  onClick={onViewHistory}
+                  className="welcome-btn-secondary welcome-btn-secondary--cyan"
+                  aria-label="View Workout History"
+                  tabIndex={0}
+                >
+                  <History size={15} />
+                  History
+                </button>
 
-  <button
-    onClick={onViewTrophies}
-    className="welcome-btn-secondary welcome-btn-secondary--gold"
-    aria-label="View Trophy Room"
-    tabIndex={0}
-  >
-    <Trophy size={15} />
-    Trophies
-  </button>
-</div>
+                <button
+                  onClick={onViewTrophies}
+                  className="welcome-btn-secondary welcome-btn-secondary--gold"
+                  aria-label="View Trophy Room"
+                  tabIndex={0}
+                >
+                  <Trophy size={15} />
+                  Trophies
+                </button>
+              </div>
 
-{/* Weight input for calorie estimation */}
-<div
-  style={{
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-    marginTop: "12px",
-    background: "rgba(0,255,100,0.04)",
-    border: "1px solid rgba(0,255,100,0.2)",
-    borderRadius: "10px",
-    padding: "10px 14px",
-  }}
->
-                  <span>⚖️</span>
-                  <span style={{ fontSize:'0.7rem', color:'var(--neon-green)', letterSpacing:'1px', textTransform:'uppercase' }}>Weight:</span>
-                  <input
-                    type="number" min="30" max="200" placeholder="70"
-                    value={userWeight}
-                    onChange={(e) => {
-                      setUserWeight(e.target.value);
-                      const val = parseFloat(e.target.value);
-                      if (!isNaN(val) && val >= 30 && val <= 200) saveUserWeight(val);
-                    }}
-                    style={{ background:'transparent', border:'none', outline:'none', color:'#fff', fontSize:'1rem', fontWeight:700, width:'50px' }}
-                  />
-                  <span style={{ color:'var(--text-dim)', fontSize:'0.8rem' }}>kg</span>
-                </div>
-
+              {/* Weight input for calorie estimation */}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  marginTop: "12px",
+                  background: "rgba(0,255,100,0.04)",
+                  border: "1px solid rgba(0,255,100,0.2)",
+                  borderRadius: "10px",
+                  padding: "10px 14px",
+                }}
+              >
+                <span>⚖️</span>
+                <span
+                  style={{
+                    fontSize: "0.7rem",
+                    color: "var(--neon-green)",
+                    letterSpacing: "1px",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Weight:
+                </span>
+                <input
+                  type="number"
+                  min="30"
+                  max="200"
+                  placeholder="70"
+                  value={userWeight}
+                  onChange={(e) => {
+                    setUserWeight(e.target.value);
+                    const val = parseFloat(e.target.value);
+                    if (!isNaN(val) && val >= 30 && val <= 200)
+                      saveUserWeight(val);
+                  }}
+                  style={{
+                    background: "transparent",
+                    border: "none",
+                    outline: "none",
+                    color: "#fff",
+                    fontSize: "1rem",
+                    fontWeight: 700,
+                    width: "50px",
+                  }}
+                />
+                <span style={{ color: "var(--text-dim)", fontSize: "0.8rem" }}>
+                  kg
+                </span>
               </div>
             </div>
+          </div>
 
           {/* ── Stat strip (From maintainer's branch) ── */}
           <div className="welcome-stats">
@@ -252,7 +294,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
           </div>
 
           {/* ── How it Works Section (From your branch) ── */}
-          <div className="how-it-works-section" style={{ marginTop: '60px' }}>
+          <div className="how-it-works-section" style={{ marginTop: "60px" }}>
             <div className="section-container">
               <div className="section-header">
                 <div className="section-badge">
@@ -267,16 +309,46 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
 
               <div className="steps-grid">
                 {[
-                  { icon: User, title: "Welcome", desc: "Choose an exercise or let the AI auto-detect", step: "01", color: "#00f0ff" },
-                  { icon: Camera, title: "Calibration", desc: "Align with the camera for optimal tracking", step: "02", color: "#00ffcc" },
-                  { icon: Activity, title: "Workout", desc: "Start exercising with live real-time rep counting", step: "03", color: "#00f0ff" },
-                  { icon: BarChart3, title: "Summary", desc: "Review detailed post-workout analytics and streaks", step: "04", color: "#00ffcc" },
+                  {
+                    icon: User,
+                    title: "Welcome",
+                    desc: "Choose an exercise or let the AI auto-detect",
+                    step: "01",
+                    color: "#00f0ff",
+                  },
+                  {
+                    icon: Camera,
+                    title: "Calibration",
+                    desc: "Align with the camera for optimal tracking",
+                    step: "02",
+                    color: "#00ffcc",
+                  },
+                  {
+                    icon: Activity,
+                    title: "Workout",
+                    desc: "Start exercising with live real-time rep counting",
+                    step: "03",
+                    color: "#00f0ff",
+                  },
+                  {
+                    icon: BarChart3,
+                    title: "Summary",
+                    desc: "Review detailed post-workout analytics and streaks",
+                    step: "04",
+                    color: "#00ffcc",
+                  },
                 ].map((step, idx) => (
                   <div key={idx} className="step-card">
-                    <div className="step-watermark" style={{ color: step.color }}>
+                    <div
+                      className="step-watermark"
+                      style={{ color: step.color }}
+                    >
                       {step.step}
                     </div>
-                    <div className="step-icon-wrapper" style={{ borderColor: `${step.color}30` }}>
+                    <div
+                      className="step-icon-wrapper"
+                      style={{ borderColor: `${step.color}30` }}
+                    >
                       <step.icon size={32} color={step.color} />
                     </div>
                     <h3 className="step-title" style={{ color: step.color }}>
@@ -290,7 +362,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
           </div>
 
           {/* ── Footer Section (From your branch) ── */}
-          <footer className="footer" style={{ marginTop: '60px' }}>
+          <footer className="footer" style={{ marginTop: "60px" }}>
             <div className="footer-container">
               <div className="footer-grid">
                 <div className="footer-column">
@@ -309,7 +381,13 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
                   <ul className="footer-links">
                     {["Features", "Usage", "API"].map((item) => (
                       <li key={item}>
-                        <a href="#" className="footer-link" onClick={(e) => e.preventDefault()}>{item}</a>
+                        <a
+                          href="#"
+                          className="footer-link"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          {item}
+                        </a>
                       </li>
                     ))}
                   </ul>
@@ -319,17 +397,26 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
                   <h4 className="footer-column-title">RESOURCES</h4>
                   <ul className="footer-links">
                     <li>
-                      <a href="https://github.com/Somil450/spectrax_1" className="footer-link">
+                      <a
+                        href="https://github.com/Somil450/spectrax_1"
+                        className="footer-link"
+                      >
                         <Github size={14} /> GitHub
                       </a>
                     </li>
                     <li>
-                      <a href="https://github.com/Somil450/spectrax_1/blob/main/README.md" className="footer-link">
+                      <a
+                        href="https://github.com/Somil450/spectrax_1/blob/main/README.md"
+                        className="footer-link"
+                      >
                         <FileText size={14} /> Documentation
                       </a>
                     </li>
                     <li>
-                      <a href="https://github.com/Somil450/spectrax_1/discussions" className="footer-link">
+                      <a
+                        href="https://github.com/Somil450/spectrax_1/discussions"
+                        className="footer-link"
+                      >
                         <Star size={14} /> Community
                       </a>
                     </li>
@@ -341,7 +428,13 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
                   <ul className="footer-links">
                     {["MIT License", "Privacy", "Terms"].map((item) => (
                       <li key={item}>
-                        <a href="#" className="footer-link" onClick={(e) => e.preventDefault()}>{item}</a>
+                        <a
+                          href="#"
+                          className="footer-link"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          {item}
+                        </a>
                       </li>
                     ))}
                   </ul>
@@ -353,7 +446,6 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
               </div>
             </div>
           </footer>
-
         </div>
       </div>
     </div>
